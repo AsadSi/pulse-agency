@@ -1,6 +1,4 @@
 "use client"
-
-import Image from "next/image"
 import Link from "next/link"
 import { useState, useEffect, useRef } from "react"
 import NavBar from "@/components/nav"
@@ -12,9 +10,8 @@ import {
   Globe,
   Search,
   Wrench,
-  BarChart,
+  FileText,
   ArrowRight,
-  ChevronRight,
   Lightbulb,
   PenTool,
   Code,
@@ -23,7 +20,7 @@ import {
 import { useLanguage } from "@/contexts/language-context"
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion"
 
-// Updated services with new icons and replacing app development with digital strategy
+// Updated services with new icons and replacing Digital Strategy with Content Creation
 const services = [
   {
     titleKey: "webSolutions",
@@ -51,22 +48,9 @@ const services = [
     icon: <Wrench className="w-8 h-8" />,
   },
   {
-    titleKey: "digitalStrategy",
-    descriptionKey: "digitalStrategyDesc",
-    icon: <BarChart className="w-8 h-8" />,
-  },
-]
-
-const partners = [
-  {
-    name: "WeCircle",
-    logo: "https://wecircle.io/wp-content/uploads/2021/12/WeCircle-Logo.png",
-    url: "http://wecircle.io",
-  },
-  {
-    name: "NSSA",
-    logo: "https://usercontent.one/wp/www.nssa.dk/wp-content/uploads/2023/03/Design-uden-navn-2-1-e1679697914217.png?media=1729086309",
-    url: "http://nssa.dk",
+    titleKey: "contentCreation",
+    descriptionKey: "contentCreationDesc",
+    icon: <FileText className="w-8 h-8" />,
   },
 ]
 
@@ -126,13 +110,14 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <main className="min-h-screen bg-gray-900 text-white">
       <NavBar />
 
       {/* Hero Section with new color scheme */}
       <section
         className="relative min-h-[120vh] flex items-center justify-center px-8 overflow-hidden pt-24"
         ref={heroRef}
+        aria-label="Hero section"
       >
         {/* Abstract background elements - updated colors */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(20,184,166,0.15),transparent_70%)]"></div>
@@ -147,7 +132,7 @@ export default function Home() {
             {heroInView && (
               <>
                 <motion.h1
-                  className="text-6xl md:text-8xl font-extrabold mb-8 tracking-tight"
+                  className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-8 tracking-tight"
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
@@ -180,7 +165,7 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.6 }}
                 >
-                  <Link href="#contact">
+                  <Link href="#contact" aria-label="Contact us to discuss your project">
                     <motion.button
                       className="px-8 py-4 bg-gradient-to-r from-blue-600 to-teal-500 rounded-full hover:shadow-lg hover:shadow-blue-500/20 transition-all shadow flex items-center gap-2 group font-medium"
                       whileHover={{ scale: 1.05 }}
@@ -190,7 +175,7 @@ export default function Home() {
                       <ArrowRight className="w-5 h-5" />
                     </motion.button>
                   </Link>
-                  <Link href="#services">
+                  <Link href="#services" aria-label="Explore our services">
                     <motion.button
                       className="px-8 py-4 border border-blue-500/30 rounded-full hover:bg-white/5 transition-colors font-medium"
                       whileHover={{ scale: 1.05 }}
@@ -207,7 +192,7 @@ export default function Home() {
       </section>
 
       {/* Services Section with updated colors */}
-      <section id="services" className="py-32 px-8 bg-gray-900 relative overflow-hidden">
+      <section id="services" className="py-32 px-8 bg-gray-900 relative overflow-hidden" aria-label="Our services">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(20,184,166,0.1),transparent_70%)]"></div>
 
         <div className="max-w-7xl mx-auto relative z-10">
@@ -227,7 +212,7 @@ export default function Home() {
             <p className="text-white/70 max-w-2xl mx-auto text-lg">{t("expertiseSubtitle")}</p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {services.map((service, index) => (
               <motion.div
                 key={index}
@@ -240,66 +225,20 @@ export default function Home() {
               >
                 <div
                   className={`w-16 h-16 mb-6 flex items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-teal-700 shadow-lg`}
+                  aria-hidden="true"
                 >
                   {service.icon}
                 </div>
                 <h3 className="text-2xl font-bold mb-3">{t(service.titleKey)}</h3>
-                <p className="text-white/70 flex-grow">{t(service.descriptionKey)}</p>
-                <div className="mt-6 flex items-center text-teal-400 font-medium">
-                  <span>Learn more</span>
-                  <ChevronRight className="w-4 h-4 ml-1 group-hover:ml-2 transition-all" />
-                </div>
+                <p className="text-white/70">{t(service.descriptionKey)}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Partners Section with updated colors */}
-      <section id="partners" className="py-24 px-8 bg-gray-900">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-400">
-              {t("partnersTitle")}
-            </h2>
-            <p className="text-white/70 max-w-2xl mx-auto text-lg mt-4">{t("partnersSubtitle")}</p>
-          </motion.div>
-
-          <div className="flex flex-wrap justify-center items-center gap-16">
-            {partners.map((partner, index) => (
-              <motion.a
-                key={index}
-                href={partner.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex justify-center items-center"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-              >
-                <Image
-                  src={partner.logo || "/placeholder.svg"}
-                  width={200}
-                  height={80}
-                  alt={partner.name}
-                  className="opacity-50 hover:opacity-100 transition-all duration-300 filter grayscale hover:grayscale-0"
-                />
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Process Section - updated colors */}
-      <section id="process" className="py-32 px-8 bg-gray-900 relative overflow-hidden">
+      <section id="process" className="py-32 px-8 bg-gray-900 relative overflow-hidden" aria-label="Our methodology">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(20,184,166,0.1),transparent_70%)]"></div>
 
         <div className="max-w-7xl mx-auto relative z-10">
@@ -327,7 +266,7 @@ export default function Home() {
               {processSteps.map((step, index) => (
                 <motion.div
                   key={index}
-                  className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 ${
+                  className={`flex flex-col md:flex-row items-center gap-6 md:gap-8 lg:gap-16 ${
                     index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                   }`}
                   initial={{ opacity: 0, y: 30 }}
@@ -338,6 +277,7 @@ export default function Home() {
                   {/* Step Number with Icon */}
                   <div
                     className={`relative z-10 w-24 h-24 rounded-full bg-gradient-to-r ${step.color} flex items-center justify-center shadow-lg`}
+                    aria-hidden="true"
                   >
                     {step.icon}
                     <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-gray-900 flex items-center justify-center text-xs font-bold">
@@ -363,7 +303,7 @@ export default function Home() {
       </section>
 
       {/* About Section - updated colors */}
-      <section id="about" className="py-32 px-8 bg-gray-900">
+      <section id="about" className="py-32 px-8 bg-gray-900" aria-label="About us">
         <div className="max-w-5xl mx-auto text-center">
           <motion.h2
             className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight"
@@ -406,7 +346,10 @@ export default function Home() {
       </section>
 
       {/* CTA Section - updated colors */}
-      <section className="py-32 px-8 bg-gradient-to-r from-blue-900/40 to-teal-900/40 relative overflow-hidden">
+      <section
+        className="py-32 px-8 bg-gradient-to-r from-blue-900/40 to-teal-900/40 relative overflow-hidden"
+        aria-label="Call to action"
+      >
         {/* Animated background elements - updated colors */}
         <div className="absolute top-20 left-20 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-teal-600/10 rounded-full blur-3xl"></div>
@@ -440,7 +383,7 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <Link href="#contact">
+            <Link href="#contact" aria-label="Contact us to discuss your project">
               <motion.button
                 className="w-full sm:w-auto px-10 py-5 bg-gradient-to-r from-blue-600 to-teal-500 rounded-full hover:shadow-lg hover:shadow-blue-500/20 transition-all flex items-center justify-center gap-2 text-lg font-medium"
                 whileHover={{ scale: 1.05 }}
@@ -456,6 +399,6 @@ export default function Home() {
 
       <Contact />
       <Footer />
-    </div>
+    </main>
   )
 }

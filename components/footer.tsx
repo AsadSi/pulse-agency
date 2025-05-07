@@ -21,10 +21,9 @@ export default function Footer() {
               </div>
             </div>
             <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-300">
-              Pulse Studio
+              Fushiguro Megumi
             </span>
           </Link>
-          <p className="text-white/70 mb-8 max-w-md">{t("footerText")}</p>
 
           {/* Social Media Links */}
           <div className="mb-8">
@@ -77,7 +76,7 @@ export default function Footer() {
 
           <div className="text-center text-white/50">
             <p>
-              © {currentYear} Pulse Studio. {t("allRights")}
+              © {currentYear} Fushiguro Megumi. {t("allRights")}
             </p>
           </div>
         </div>

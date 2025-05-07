@@ -25,19 +25,22 @@ export default function NavBar() {
       }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-teal-500 p-1 shadow-md animate-pulse">
+        <Link href="/" className="flex items-center gap-3" aria-label="Fushiguro Megumi - Home">
+          <div
+            className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-teal-500 p-1 shadow-md animate-pulse"
+            aria-hidden="true"
+          >
             <div className="w-full h-full bg-gray-900 rounded-full flex items-center justify-center">
               <div className="w-4 h-4 rounded-full border-2 border-white"></div>
             </div>
           </div>
           <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-300">
-            Pulse Studio
+            Fushiguro Megumi
           </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden md:flex items-center space-x-8" aria-label="Main navigation">
           <Link href="#services" className="text-sm text-white/80 hover:text-teal-300 transition-colors">
             {t("services")}
           </Link>
@@ -66,6 +69,8 @@ export default function NavBar() {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
+            aria-expanded={isMenuOpen}
+            aria-label="Toggle menu"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </motion.button>
@@ -81,6 +86,7 @@ export default function NavBar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
+            aria-label="Mobile navigation"
           >
             <div className="container mx-auto px-6 py-4 flex flex-col space-y-4">
               <Link
